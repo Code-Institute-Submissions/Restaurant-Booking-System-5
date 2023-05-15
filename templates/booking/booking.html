@@ -1,26 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            cursor: pointer;
-            /* Add cursor style to indicate clickable cells */
-        }
-    </style>
-    <title>Booking System</title>
-</head>
-
+{% block content %}
 <body>
     <h1>Code restaurant booking system</h1>
     <table>
@@ -143,13 +123,11 @@
         <script>
             const bookingCells = document.querySelectorAll('.booking-cell');
             bookingCells.forEach(cell => {
-                cell.addEventListener('click', handleCellClick);
+                cell.addEventListener('click', bookTable);
             });
 
             function handleCellClick(event) {
                 
             }
         </script>
-</body>
-
-</html>
+{%endblock%}
