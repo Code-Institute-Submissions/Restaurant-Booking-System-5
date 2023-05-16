@@ -1,7 +1,10 @@
 from django import forms
+from .models import Slot
 
 
 class BookingForm(forms.Form):
-    # Define your form fields here
-    day = forms.CharField(max_length=10)
-    time = forms.CharField(max_length=10)
+    slot = forms.ModelChoiceField(queryset=Slot.objects.all())
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['slot'].widget.attrs.update({'class': 'form-control'})
