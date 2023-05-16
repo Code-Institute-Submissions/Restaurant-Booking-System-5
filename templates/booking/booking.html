@@ -2,13 +2,17 @@
 
 {% block content %}
 <body>
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <body>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <!-- Rest of your table content -->
+    </body>
     <table>
         <thead>
             <tr>
@@ -29,14 +33,14 @@
         <tbody>
             <tr>
                 <th>Monday</th>
-                <td class="booking-cell" data-day="Monday" data-time="5:00 PM">
-                    {% if user.is_authenticated %}
-                        <form action="{% url 'book_slot' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="day" value="Monday">
-                            <input type="hidden" name="time" value="5:00 PM">
-                            <button type="submit">Book</button>
-                        </form>
+                    <td class="booking-cell" data-day="Monday" data-time="5:00 PM">
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'book_slot' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="day" value="Monday">
+                                <input type="hidden" name="time" value="5:00 PM">
+                                <button type="submit">Book</button>
+                            </form>
                     {% else %}
                         <span>Please log in to book</span>
                     {% endif %}

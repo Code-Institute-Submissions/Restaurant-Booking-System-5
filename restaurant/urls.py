@@ -22,4 +22,5 @@ urlpatterns = [
     path('', displayPage, name='displayPage'),
     path('accounts/', include('allauth.urls')),
     path('book-slot/', book_slot, name='book_slot'),
+    path('booking/', displayPage, name='booking'),
 ]
