@@ -53,9 +53,49 @@
                         <span>Please log in to book</span>
                     {% endif %}
                 </td>
-                <!-- Add similar cells for other time slots -->
+                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="5:30 PM">
+                    {% if user.is_authenticated %}
+                        {% if slot.booked %}
+                            <form action="{% url 'book_slot' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="slot" value="{{ slot.id }}">
+                                <input type="hidden" name="cancel" value="true">
+                                <button type="submit">Cancel</button>
+                            </form>
+                        {% else %}
+                            <form action="{% url 'book_slot' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="slot" value="{{ slot.id }}">
+                                <button type="submit">Book</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <span>Please log in to book</span>
+                    {% endif %}
+                </td>
+                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="6:00 PM">
+                    {% if user.is_authenticated %}
+                        {% if slot.booked %}
+                            <form action="{% url 'book_slot' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="slot" value="{{ slot.id }}">
+                                <input type="hidden" name="cancel" value="true">
+                                <button type="submit">Cancel</button>
+                            </form>
+                        {% else %}
+                            <form action="{% url 'book_slot' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="slot" value="{{ slot.id }}">
+                                <button type="submit">Book</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <span>Please log in to book</span>
+                    {% endif %}
+                </td>
+                <!-- Add cells for other times -->
             </tr>
-            <!-- Add similar rows for other days -->
+            <!-- Add rows for other days -->
         </tbody>
     </table>
     
