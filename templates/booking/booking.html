@@ -33,14 +33,22 @@
         <tbody>
             <tr>
                 <th>Monday</th>
-                    <td class="booking-cell" data-day="Monday" data-time="5:00 PM">
-                        {% if user.is_authenticated %}
+                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="5:00 PM">
+                    {% if user.is_authenticated %}
+                        {% if slot.booked %}
                             <form action="{% url 'book_slot' %}" method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="day" value="Monday">
-                                <input type="hidden" name="time" value="5:00 PM">
+                                <input type="hidden" name="slot" value="{{ slot.id }}">
+                                <input type="hidden" name="cancel" value="true">
+                                <button type="submit">Cancel</button>
+                            </form>
+                        {% else %}
+                            <form action="{% url 'book_slot' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="slot" value="{{ slot.id }}">
                                 <button type="submit">Book</button>
                             </form>
+                        {% endif %}
                     {% else %}
                         <span>Please log in to book</span>
                     {% endif %}

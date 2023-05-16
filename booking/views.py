@@ -18,24 +18,34 @@ def book_slot(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            day = form.cleaned_data['day']
-            time = form.cleaned_data['time']
-
-            # Check if time slot is already booked
-            if Booking.objects.filter(slot__day=day, slot__time=time).exists():
-                error_message = "The selected time slot is already booked."
-                messages.error(request, error_message)
-            else:
-                # Create a new booking
-                slot = Slot.objects.get(day=day, time=time)
-                booking = Booking(user=request.user, slot=slot)
-                booking.save()
-                success_message = "Booking successful!"
+            slot = form.cleaned_data['slot']
+            
+            # Check if the slot is already booked
+            if slot.booked:
+                # Cancel the booking
+                slot.booked = False
+                slot.save()
+                
+                # Display a success message
+                success_message = "Booking canceled successfully."
                 messages.success(request, success_message)
-        else:
-            error_message = "Invalid form submission."
-            messages.error(request, error_message)
+            else:
+                # Check if the slot is available for booking
+                if not slot.available:
+                    # Display an error message
+                    error_message = "The selected slot is not available for booking."
+                    messages.error(request, error_message)
+                else:
+                    # Book the slot
+                    slot.booked = True
+                    slot.save()
+                    
+                    # Display a success message
+                    success_message = "Booking successful! Your slot has been reserved."
+                    messages.success(request, success_message)
+
+            return redirect('booking_page')
     else:
         form = BookingForm()
 
-    return redirect('booking')
+    return render(request, 'booking/booking.html', {'form': form})
