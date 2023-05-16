@@ -20,7 +20,7 @@ def book_slot(request):
             # Check if time slot is already booked
             if Booking.objects.filter(day=day, time=time).exists():
                 error_message = "The selected time slot is already booked."
-                return render(request, 'booking/book_slot.html', {'form': form, 'error_message': error_message})
+                return render(request, 'booking/booking.html', {'form': form, 'error_message': error_message})
             
             # Create a new booking 
             booking = Booking(user=request.user, day=day, time=time)
@@ -31,4 +31,4 @@ def book_slot(request):
     else:
         form = BookingForm()
 
-    return render(request, 'booking/book_slot.html', {'form': form})
+    return render(request, 'booking/booking.html', {'form': form})
