@@ -13,3 +13,7 @@ class Slot(models.Model):
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE)
+
+    @property
+    def day(self):
+        return self.slot.day

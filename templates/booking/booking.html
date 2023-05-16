@@ -25,7 +25,7 @@
                 <th>Monday</th>
                 <td class="booking-cell" data-day="Monday" data-time="5:00 PM">
                     {% if user.is_authenticated %}
-                        <form action="{% url 'booking:book_slot' %}" method="POST">
+                        <form action="{% url 'book_slot' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="day" value="Monday">
                             <input type="hidden" name="time" value="5:00 PM">
