@@ -19,8 +19,7 @@ def book_slot(request):
         form = BookingForm(request.POST)
         if form.is_valid():
             slot = form.cleaned_data['slot']
-            
-            # Check if the slot is already booked
+                     
             if slot.booked:
                 # Cancel the booking
                 slot.booked = False
@@ -30,19 +29,14 @@ def book_slot(request):
                 success_message = "Booking canceled successfully."
                 messages.success(request, success_message)
             else:
-                # Check if the slot is available for booking
-                if not slot.available:
-                    # Display an error message
-                    error_message = "The selected slot is not available for booking."
-                    messages.error(request, error_message)
-                else:
-                    # Book the slot
-                    slot.booked = True
-                    slot.save()
+               
+                # Book the slot
+                slot.booked = True
+                slot.save()
                     
-                    # Display a success message
-                    success_message = "Booking successful! Your slot has been reserved."
-                    messages.success(request, success_message)
+                # Display a success message
+                success_message = "Booking successful! Your slot has been reserved."
+                messages.success(request, success_message)
 
             return redirect('booking_page')
     else:

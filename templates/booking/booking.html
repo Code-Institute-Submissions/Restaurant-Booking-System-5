@@ -33,7 +33,7 @@
         <tbody>
             <tr>
                 <th>Monday</th>
-                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="5:00 PM">
+                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="5.00">
                     {% if user.is_authenticated %}
                         {% if slot.booked %}
                             <form action="{% url 'book_slot' %}" method="POST">
@@ -53,7 +53,7 @@
                         <span>Please log in to book</span>
                     {% endif %}
                 </td>
-                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="5:30 PM">
+                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="5.30">
                     {% if user.is_authenticated %}
                         {% if slot.booked %}
                             <form action="{% url 'book_slot' %}" method="POST">
@@ -73,7 +73,7 @@
                         <span>Please log in to book</span>
                     {% endif %}
                 </td>
-                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="6:00 PM">
+                <td class="booking-cell {% if slot.booked %}booked{% endif %}" data-day="Monday" data-time="6.00">
                     {% if user.is_authenticated %}
                         {% if slot.booked %}
                             <form action="{% url 'book_slot' %}" method="POST">
